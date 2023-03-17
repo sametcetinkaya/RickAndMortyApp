@@ -1,16 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
     namespace 'com.sametcetinkaya.rickandmortyapp'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.sametcetinkaya.rickandmortyapp"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -23,6 +26,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -33,6 +40,15 @@ android {
 }
 
 dependencies {
+    def retrofit_version = "2.9.0"
+    def navigation_version = "2.5.3"
+    def lifecycle_version = "2.4.1"
+    def dagger_hilt_version = "2.42"
+    def paging_version = "3.1.1"
+    def coroutines_version = "1.4.3"
+    def coroutines_core_version = "1.5.0-RC"
+    def jetpack_hilt_version = "1.0.0-alpha03"
+    def jetpack_hilt_version_compiler = "1.0.0-beta01"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -41,4 +57,36 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+    //GSON
+    implementation 'com.google.code.gson:gson:2.9.0'
+    //Dagger - Hilt
+    implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt_version"
+    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
+    //Navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    //Image
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    //Navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    //Pagination
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
+    // Arch
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    //Jetpack Hilt library
+    kapt "androidx.hilt:hilt-compiler:$jetpack_hilt_version_compiler"
 }
