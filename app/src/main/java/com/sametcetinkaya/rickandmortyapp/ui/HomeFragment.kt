@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.sametcetinkaya.rickandmortyapp.data.models.character.CharacterData
 import com.sametcetinkaya.rickandmortyapp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -41,6 +43,11 @@ class HomeFragment : Fragment() {
 
         setupCategoriesRecyclerView()
         startSearchJob()
+
+        characterAdapter.onCharacterItemClick = {
+            val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(it)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupCategoriesRecyclerView() {

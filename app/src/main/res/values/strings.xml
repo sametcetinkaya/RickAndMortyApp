@@ -2,4 +2,10 @@
     <string name="app_name">RickAndMortyApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_getting_data">Error getting the data</string>
+    <string name="accept">Accept</string>
+    <string name="canceler">Canceler</string>
+    <string name="error_internet">Error Internet</string>
+    <string name="planet2">Planet</string>
+    <string name="earth_c_137">Earth (C-137)</string>
 </resources>

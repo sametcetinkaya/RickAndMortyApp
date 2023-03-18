@@ -10,22 +10,30 @@ import com.sametcetinkaya.rickandmortyapp.data.models.character.CharacterData
 import com.sametcetinkaya.rickandmortyapp.databinding.CharacterRowBinding
 import com.sametcetinkaya.rickandmortyapp.utils.getColorStatus
 
-class CharacterAdapter : PagingDataAdapter<CharacterData, CharacterAdapter.MyViewHolder>(DiffUtilCallBack()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(
+class CharacterAdapter : PagingDataAdapter<CharacterData, CharacterAdapter.CharacterViewHolder>(DiffUtilCallBack()) {
+
+    var onCharacterItemClick :(CharacterData) -> Unit = {}
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CharacterViewHolder {
+        return CharacterViewHolder(
             CharacterRowBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
+                LayoutInflater.from(viewGroup.context),
+                viewGroup,
                 false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+    override fun onBindViewHolder(characterViewHolder: CharacterViewHolder, position: Int) {
+        characterViewHolder.bind(getItem(position)!!)
+
+        characterViewHolder.itemView.setOnClickListener {
+            onCharacterItemClick.invoke(getItem(position)!!)
+        }
+
     }
 
-    class MyViewHolder(private val binding: CharacterRowBinding) :
+    class CharacterViewHolder(private val binding: CharacterRowBinding) :
         RecyclerView.ViewHolder(binding.root){
 
             fun bind (characterData : CharacterData){
